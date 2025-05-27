@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service
 
-geckodriver_path = r"C:\External\Nanna\Code\sw testing\geckodriver.exe"
+geckodriver_path = r"geckodriver.exe"#Enter Geckodriver Location
 service = Service(geckodriver_path)
 
 driver = webdriver.Firefox(service=service)
