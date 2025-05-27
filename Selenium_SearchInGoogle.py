@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.service import Service
 
-service = Service(r"geckodriver.exe")#Enter Geckodriver Location
+service = Service(r"geckodriver-v0.36.0-win32/geckodriver.exe")#Enter Geckodriver Location
 driver = webdriver.Firefox(service=service)
 
 driver.get("https://www.google.com")
