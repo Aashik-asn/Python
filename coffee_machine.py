@@ -41,19 +41,21 @@ def check_resources(u_choice, machine, menu):
         return f"Insufficient Ingredients : {res}\n"
     return ""
 
-
-
+print("COFFEE MACHINE")
+print("Note: Type \"report\" to generate report of available resources")
+print("      Type \"off\" to switch off the machine\n")
 while True:
     transaction_status = False
     rs_check =""
+
     choice = input("What would you like ? (espresso/latte/cappuccino): ").lower()
     if choice == "report":
         key=list(resources.keys())
         value=list(resources.values())
-        print("%s : %s ml"%(key[0],value[0]))
-        print("%s : %s ml"%(key[1],value[1]))
-        print("%s : %s g"%(key[2],value[2]))
-        print("%s : $ %s\n"%(key[3],value[3]))
+        print("%s : %sml"%(key[0],value[0]))
+        print("%s : %sml"%(key[1],value[1]))
+        print("%s : %sg"%(key[2],value[2]))
+        print("%s : $%s\n"%(key[3],value[3]))
         continue
     elif choice == "off":
         print("Thank you!!❤️")
