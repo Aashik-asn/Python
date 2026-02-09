@@ -35,19 +35,19 @@ THEMES = {
         "bg": "GreenYellow",
         "snake": "black",
         "food": "HotPink",
-        "score":"black"
+        "score":"black",
     },
     "dark": {
         "bg": "black",
         "snake": "lime",
         "food": "red",
-        "score": "lime"
+        "score": "lime",
     },
     "pastel": {
         "bg": "#F5F5F5",
         "snake": "#4CAF50",
         "food": "#FF4081",
-        "score": "#4CAF50"
+        "score": "#4CAF50",
     }
 }
 
@@ -56,10 +56,12 @@ current_theme = "classic"
 def apply_theme():
     theme = THEMES[current_theme]
     screen.bgcolor(theme["bg"])
-    for segment in snake.segments:
-        segment.color(theme["snake"])
+    for seg in snake.segments:
+        seg.color(theme["snake"])
     food.color(theme["food"])
     scoreboard.set_color(theme["score"])
+
+
 
 def change_theme():
     global current_theme
@@ -82,6 +84,10 @@ def restart_game():
     snake.reset()
     food.refresh()
     scoreboard.reset_score()
+
+    for seg in snake.segments:
+        seg.color(THEMES[current_theme]["snake"])
+
     if not is_paused:
         pygame.mixer.music.play(-1)
 
@@ -97,11 +103,16 @@ def toggle_pause():
 
 screen.listen()
 screen.onkey(snake.up, "w")
+screen.onkey(snake.up, "Up")
 screen.onkey(snake.down, "s")
+screen.onkey(snake.down, "Down")
 screen.onkey(snake.left, "a")
+screen.onkey(snake.left, "Left")
 screen.onkey(snake.right, "d")
+screen.onkey(snake.right, "Right")
 screen.onkey(restart_game, "r")
 screen.onkey(toggle_pause, "p")
+screen.onkey(toggle_pause, "space")
 screen.onkey(change_theme, "t")
 
 # -------- GAME LOOP -------- #
@@ -117,9 +128,14 @@ while True:
         if snake.head.distance(food) < 15:
             food.refresh()
             snake.extend()
+
+            # FIX: apply current theme color to the new segment
+            snake.segments[-1].color(THEMES[current_theme]["snake"])
+
             scoreboard.increase_score()
             game_speed = max(0.05, game_speed - 0.005)
             eat_sound.play()
+
         #border collision
         BORDER_LIMIT = 380  # must match border placement
 
@@ -141,5 +157,3 @@ while True:
                 scoreboard.game_over()
                 game_over_sound.play()
                 pygame.mixer.music.stop()
-
-screen.exitonclick()

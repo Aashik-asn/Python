@@ -20,7 +20,8 @@ class Scoreboard:
         self.game_over_turtle.hideturtle()
 
         self.score = 0
-        self.text_color = "black"  # default
+        self.text_color = "black"
+        self.over_color = "black"   # default
 
         with open("high_score.txt") as file:
             self.high_score = int(file.read())
@@ -33,6 +34,7 @@ class Scoreboard:
         (used by theme selector)
         """
         self.text_color = color
+        self.over_color = color
         self.update_score()
 
     def update_score(self):
@@ -60,6 +62,7 @@ class Scoreboard:
 
     def game_over(self):
         self.game_over_turtle.goto(0, 0)
+        self.game_over_turtle.color(self.over_color)
         self.game_over_turtle.write(
             "GAME OVER",
             align="center",

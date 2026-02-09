@@ -8,6 +8,7 @@ UP, DOWN, LEFT, RIGHT = 90, 270, 180, 0
 
 class Snake:
     def __init__(self):
+        self.can_change_direction = True
         self.segments = []
         self.create_snake()
         self.head = self.segments[0]
@@ -37,22 +38,27 @@ class Snake:
             self.segments[i].goto(x, y)
 
         self.head.forward(MOVE_DISTANCE)
+        self.can_change_direction = True
 
     def up(self):
-        if self.head.heading() != DOWN:
+        if self.can_change_direction and self.head.heading() != DOWN:
             self.head.setheading(UP)
+            self.can_change_direction = False
 
     def down(self):
-        if self.head.heading() != UP:
+        if self.can_change_direction and self.head.heading() != UP:
             self.head.setheading(DOWN)
+            self.can_change_direction = False
 
     def left(self):
-        if self.head.heading() != RIGHT:
+        if self.can_change_direction and self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
+            self.can_change_direction = False
 
     def right(self):
-        if self.head.heading() != LEFT:
+        if self.can_change_direction and self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+            self.can_change_direction = False
 
     def reset(self):
         """Completely reset snake"""
