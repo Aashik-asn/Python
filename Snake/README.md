@@ -1,4 +1,4 @@
-THE 3AY SNAKE – HOW TO RUN
+SNAKE – HOW TO RUN
 
 Install Python 3.9 or above
 https://www.python.org/downloads/
